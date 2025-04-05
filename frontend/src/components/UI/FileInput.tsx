@@ -37,8 +37,6 @@ const FileInput: React.FC<Props> = ({
     }
   };
 
-  console.log(inputRef);
-
   return (
     <>
       <input

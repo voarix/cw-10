@@ -4,10 +4,15 @@ import { IComment } from "../../../types";
 
 interface Props {
   comment: IComment;
+  onDelete: (id: number) => void;
   deleteLoading?: boolean;
 }
 
-const CommentItem: React.FC<Props> = ({ comment, deleteLoading = false }) => {
+const CommentItem: React.FC<Props> = ({
+  comment,
+  onDelete,
+  deleteLoading = false,
+}) => {
   return (
     <Box
       sx={{
@@ -42,6 +47,7 @@ const CommentItem: React.FC<Props> = ({ comment, deleteLoading = false }) => {
           variant="outlined"
           color="error"
           size="small"
+          onClick={() => onDelete(Number(comment.id))}
           disabled={deleteLoading}
           sx={{ ml: 2 }}
         >

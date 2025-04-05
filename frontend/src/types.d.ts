@@ -18,3 +18,5 @@ export interface IComment {
   author: string;
   description: string;
 }
+
+export type ICommentMutation = Omit<IComment, "id">;

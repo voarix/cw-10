@@ -16,6 +16,7 @@ const NewPost = () => {
       toast.success("Post was successfully created!");
       navigate("/");
     } catch (e) {
+      toast.error("Post failed to create a new post!");
       console.error(e);
     }
   };

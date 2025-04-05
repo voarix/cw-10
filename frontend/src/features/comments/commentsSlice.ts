@@ -1,6 +1,10 @@
 import { IComment } from "../../types";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAllComments } from "./commentsThunks.ts";
+import {
+  createComment,
+  deleteComment,
+  fetchAllComments,
+} from "./commentsThunks.ts";
 import { RootState } from "../../app/store.ts";
 
 interface CommentState {
@@ -36,6 +40,33 @@ export const commentsSlice = createSlice({
       .addCase(fetchAllComments.rejected, (state) => {
         state.fetchLoading = false;
         state.error = true;
+      })
+
+      .addCase(createComment.pending, (state) => {
+        state.createLoading = true;
+        state.error = false;
+      })
+      .addCase(createComment.fulfilled, (state) => {
+        state.createLoading = false;
+      })
+      .addCase(createComment.rejected, (state) => {
+        state.createLoading = false;
+        state.error = true;
+      })
+
+      .addCase(deleteComment.pending, (state) => {
+        state.deleteLoading = true;
+        state.error = false;
+      })
+      .addCase(deleteComment.fulfilled, (state, { meta: arg }) => {
+        state.items = state.items.filter(
+          (comment) => comment.id !== Number(arg),
+        );
+        state.deleteLoading = false;
+      })
+      .addCase(deleteComment.rejected, (state) => {
+        state.deleteLoading = false;
+        state.error = true;
       });
   },
 });
@@ -45,3 +76,5 @@ export const commentsReducer = commentsSlice.reducer;
 export const selectComments = (state: RootState) => state.comments.items;
 export const selectCommentsLoading = (state: RootState) =>
   state.comments.fetchLoading;
+export const selectCreateLoading = (state: RootState) =>
+  state.comments.createLoading;
