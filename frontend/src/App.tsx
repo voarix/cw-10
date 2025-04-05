@@ -10,7 +10,7 @@ const App = () => {
   return (
     <>
       <CssBaseline />
-      <ToastContainer />
+      <ToastContainer autoClose={500} />
       <main>
         <Container maxWidth="xl" sx={{ mt: 5 }}>
           <Routes>

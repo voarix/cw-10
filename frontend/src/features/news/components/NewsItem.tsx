@@ -10,6 +10,10 @@ import {
 } from "@mui/material";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks.ts";
+import { deleteOneNews, fetchAllNews } from "../newsThunks.ts";
+import { selectDeleteLoading } from "../newsSlice.ts";
+import { toast } from "react-toastify";
 
 interface Props {
   id: number | string;
@@ -28,6 +32,9 @@ const NewsItem: React.FC<Props> = ({
   description,
   fullView,
 }) => {
+  const dispatch = useAppDispatch();
+  const deleteLoading = useAppSelector(selectDeleteLoading);
+
   const formatDate = () => {
     const date = new Date(created_at);
     const now = new Date();
@@ -48,6 +55,19 @@ const NewsItem: React.FC<Props> = ({
       return dayjs(created_at).format("MM.DD | HH:mm");
     } else if (timeDifference > millisecInYear) {
       return dayjs(created_at).format("YYYY.MM.DD | HH:mm");
+    }
+  };
+
+  const onDelete = async () => {
+    if (window.confirm("Are you sure want to delete this post?")) {
+      try {
+        await dispatch(deleteOneNews(id.toString())).unwrap();
+        toast.success("Post deleted successfully.");
+        await dispatch(fetchAllNews());
+      } catch (e) {
+        toast.error("Post deleted error");
+        console.error("Failed to delete news:", e);
+      }
     }
   };
 
@@ -131,11 +151,18 @@ const NewsItem: React.FC<Props> = ({
                   size="small"
                   component={Link}
                   to={`/news/${id}`}
+                  disabled={deleteLoading}
                 >
                   Read full post
                 </Button>
-                <Button variant="contained" size="small">
-                  Delete
+                <Button
+                  variant="contained"
+                  size="small"
+                  color="error"
+                  onClick={onDelete}
+                  disabled={deleteLoading}
+                >
+                  {deleteLoading ? "Deleting..." : "Delete"}
                 </Button>
               </Box>
             )}

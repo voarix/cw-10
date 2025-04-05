@@ -19,7 +19,7 @@ const NewsFullView = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchNewsById(id));
+      dispatch(fetchNewsById(id.toString()));
     }
   }, [id, dispatch]);
 
