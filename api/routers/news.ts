@@ -59,11 +59,11 @@ newsRouter.post('/', imagesUpload.single('image'), async (req, res, next) => {
         );
 
         const resultHeader = result as ResultSetHeader;
-        const id = resultHeader.insertId
+        const id = resultHeader.insertId;
 
         const [oneItem] = await connection.query('SELECT * FROM news WHERE id = ?', [id]);
         const news = oneItem as News[];
-        res.send(news);
+        res.send(news[0]);
     } catch (e) {
         next(e);
     }

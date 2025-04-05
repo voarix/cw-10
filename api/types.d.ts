@@ -11,3 +11,12 @@ export interface NewsMutation {
     description: string;
     image: string | null;
 }
+
+export interface CommentResponse {
+    id: number;
+    news_id: number;
+    author: string;
+    description: string;
+}
+
+export type CommentMutation = Omit<CommentResponse, 'id'>;
