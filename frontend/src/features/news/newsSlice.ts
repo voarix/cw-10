@@ -90,8 +90,5 @@ export const newsReducer = newsSlice.reducer;
 export const selectNews = (state: RootState) => state.news.items;
 export const selectNewsLoading = (state: RootState) => state.news.fetchLoading;
 export const selectOnePost = (state: RootState) => state.news.oneItem;
-export const selectCreateLoading = (state: RootState) =>
-  state.news.createLoading;
 export const selectDeleteLoading = (state: RootState) =>
   state.news.deleteLoading;
-export const selectError = (state: RootState) => state.news.error;

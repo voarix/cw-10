@@ -37,7 +37,7 @@ const CommentForm: React.FC<Props> = ({ onSubmit, loading = false }) => {
 
       setForm(initialForm);
     } else {
-      alert('Please enter a description');
+      alert("Please enter a description");
     }
   };
 

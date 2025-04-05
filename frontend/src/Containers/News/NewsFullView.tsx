@@ -1,15 +1,27 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks.ts";
-import { selectNewsLoading, selectOnePost, } from "../../features/news/newsSlice.ts";
+import {
+  selectNewsLoading,
+  selectOnePost,
+} from "../../features/news/newsSlice.ts";
 import NewsItem from "../../features/news/components/NewsItem.tsx";
 import { fetchNewsById } from "../../features/news/newsThunks.ts";
 import { useEffect } from "react";
 import Spinner from "../../components/UI/Spinner.tsx";
 import { Box, Button, Typography } from "@mui/material";
-import { selectComments, selectCommentsLoading, } from "../../features/comments/commentsSlice.ts";
+import {
+  selectComments,
+  selectCommentsLoading, selectCreateLoading,
+} from "../../features/comments/commentsSlice.ts";
 import CommentItem from "../../features/comments/components/CommentItem.tsx";
-import { createComment, deleteComment, fetchAllComments, } from "../../features/comments/commentsThunks.ts";
-import CommentForm, { CommentData, } from "../../features/comments/components/CommentForm.tsx";
+import {
+  createComment,
+  deleteComment,
+  fetchAllComments,
+} from "../../features/comments/commentsThunks.ts";
+import CommentForm, {
+  CommentData,
+} from "../../features/comments/components/CommentForm.tsx";
 
 const NewsFullView = () => {
   const dispatch = useAppDispatch();
@@ -17,7 +29,7 @@ const NewsFullView = () => {
   const loading = useAppSelector(selectNewsLoading);
   const comments = useAppSelector(selectComments);
   const loadingComments = useAppSelector(selectCommentsLoading);
-  const createCommentLoading = useAppSelector(selectCommentsLoading);
+  const createCommentLoading = useAppSelector(selectCreateLoading);
   const { id } = useParams();
   const navigate = useNavigate();
 
