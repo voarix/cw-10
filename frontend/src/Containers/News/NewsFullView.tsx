@@ -8,28 +8,41 @@ import NewsItem from "../../features/news/components/NewsItem.tsx";
 import { fetchNewsById } from "../../features/news/newsThunks.ts";
 import { useEffect } from "react";
 import Spinner from "../../components/UI/Spinner.tsx";
-import { Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import {
+  selectComments,
+  selectCommentsLoading,
+} from "../../features/comments/commentsSlice.ts";
+import CommentItem from "../../features/comments/components/CommentItem.tsx";
+import { fetchAllComments } from "../../features/comments/commentsThunks.ts";
 
 const NewsFullView = () => {
   const dispatch = useAppDispatch();
-  const { id } = useParams();
   const newsItem = useAppSelector(selectOnePost);
   const loading = useAppSelector(selectNewsLoading);
+  const comments = useAppSelector(selectComments);
+  const loadingComments = useAppSelector(selectCommentsLoading);
+  const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
       dispatch(fetchNewsById(id.toString()));
+      dispatch(fetchAllComments());
     }
   }, [id, dispatch]);
 
-  if (loading) {
+  if (loading || loadingComments) {
     return <Spinner />;
   }
 
   if (!newsItem) {
     return <div>News not found</div>;
   }
+
+  const filteredComments = comments.filter(
+    (comment) => comment.news_id === Number(id),
+  );
 
   return (
     <>
@@ -50,6 +63,19 @@ const NewsFullView = () => {
           fullView={true}
         />
       )}
+
+      <Box sx={{ mt: 4 }}>
+        <Typography variant="h5" sx={{ mb: 4 }}>
+          Comments:
+        </Typography>
+        {filteredComments.length > 0 ? (
+          filteredComments.map((comment) => (
+            <CommentItem key={comment.id} comment={comment} />
+          ))
+        ) : (
+          <Typography sx={{ opacity: 0.5 }}>No comments</Typography>
+        )}
+      </Box>
     </>
   );
 };

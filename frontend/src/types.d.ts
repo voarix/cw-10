@@ -11,3 +11,10 @@ export interface INewsMutation {
   description: string;
   image: File | null;
 }
+
+export interface IComment {
+  id: number;
+  news_id: number;
+  author: string;
+  description: string;
+}
