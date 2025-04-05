@@ -8,7 +8,7 @@ const mysqlDb = {
             host: 'localhost',
             user: 'root',
             password: 'root',
-            database: 'inventory_api',
+            database: 'news_api',
         });
     },
     async getConnection() {
