@@ -5,3 +5,9 @@ export interface INews {
   image: string | null;
   created_at: string;
 }
+
+export interface INewsMutation {
+  title: string;
+  description: string;
+  image: File | null;
+}

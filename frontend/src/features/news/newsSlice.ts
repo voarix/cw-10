@@ -28,7 +28,7 @@ export const newsSlice = createSlice({
         state.error = false;
       })
       .addCase(fetchAllNews.fulfilled, (state, { payload: news }) => {
-        state.items = news;
+        state.items = [...news].reverse();
         state.fetchLoading = false;
       })
       .addCase(fetchAllNews.rejected, (state) => {
