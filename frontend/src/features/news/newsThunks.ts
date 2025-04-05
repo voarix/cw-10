@@ -10,6 +10,14 @@ export const fetchAllNews = createAsyncThunk<INews[], void>(
   },
 );
 
+export const fetchNewsById = createAsyncThunk<INews, string>(
+  "news/fetchNewsById",
+  async (news_id) => {
+    const response = await axiosAPI.get<INews>("/news/" + news_id);
+    return response.data || null;
+  },
+);
+
 export const createNews = createAsyncThunk<void, INewsMutation>(
   "news/createNews",
   async (productToAdd) => {

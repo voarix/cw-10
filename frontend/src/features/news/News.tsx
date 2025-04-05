@@ -46,12 +46,13 @@ const News = () => {
         <Spinner />
       ) : (
         <Grid container direction="row" spacing={1}>
-          {news.map((message) => (
+          {news.map((post) => (
             <NewsItem
-              key={message.id}
-              title={message.title}
-              image={message.image || undefined}
-              created_at={message.created_at}
+              key={post.id}
+              id={post.id}
+              title={post.title}
+              image={post.image || undefined}
+              created_at={post.created_at}
             />
           ))}
         </Grid>

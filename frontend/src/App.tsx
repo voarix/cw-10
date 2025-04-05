@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import News from "./features/news/News.tsx";
 import { ToastContainer } from "react-toastify";
 import NewPost from "./Containers/News/NewPost.tsx";
+import NewsFullView from "./Containers/News/NewsFullView.tsx";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<News />} />
             <Route path="/news" element={<News />} />
+            <Route path="/news/:id" element={<NewsFullView />} />
             <Route path="/new-post" element={<NewPost />} />
             <Route
               path="*"
