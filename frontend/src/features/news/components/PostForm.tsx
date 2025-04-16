@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { INewsMutation } from "../../../types";
 import FileInput from "../../../components/UI/FileInput.tsx";
-import { productSchema } from "../../../zodSchemas/productsSchemas.ts";
+import { postSchema } from "../../../zodSchemas/postSchemas.ts";
 
 interface Props {
   onSubmitNews: (news: INewsMutation) => void;
@@ -18,7 +18,7 @@ const PostForm: React.FC<Props> = ({ onSubmitNews }) => {
     formState: { errors },
     setValue,
   } = useForm({
-    resolver: zodResolver(productSchema),
+    resolver: zodResolver(postSchema),
     defaultValues: {
       title: "",
       description: "",

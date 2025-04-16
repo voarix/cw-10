@@ -20,12 +20,12 @@ export const fetchNewsById = createAsyncThunk<INews, string>(
 
 export const createNews = createAsyncThunk<void, INewsMutation>(
   "news/createNews",
-  async (productToAdd) => {
+  async (postToAdd) => {
     const formData = new FormData();
-    const keys = Object.keys(productToAdd) as (keyof INewsMutation)[];
+    const keys = Object.keys(postToAdd) as (keyof INewsMutation)[];
 
     keys.forEach((key) => {
-      const value = productToAdd[key] as string;
+      const value = postToAdd[key] as string;
       if (value !== null) {
         formData.append(key, value);
       }
