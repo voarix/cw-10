@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../app/hooks.ts";
 import { useNavigate } from "react-router-dom";
 import { INewsMutation } from "../../types";
 import { createNews } from "../../features/news/newsThunks.ts";
+import BackHome from "../../components/UI/BackHome.tsx";
 
 const NewPost = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +24,8 @@ const NewPost = () => {
 
   return (
     <>
+      <BackHome newPost/>
+
       <Typography
         variant="h4"
         style={{ textAlign: "center", marginBottom: "20px" }}
